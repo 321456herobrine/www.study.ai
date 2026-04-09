@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI 分身 · 详细介绍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #f5f5f0;
+      color: #222;
+      line-height: 1.7;
+    }
+    a { color: #444; text-decoration: none; }
+
+    header {
+      position: relative;
+      padding: 18px 16px 10px;
+      background: radial-gradient(circle at top, #ffffff 0, #f7f7f0 40%, #e5e1d8 100%);
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(0,0,0,0.08) 0, transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(0,0,0,0.06) 0, transparent 55%),
+        radial-gradient(circle at 50% 90%, rgba(0,0,0,0.04) 0, transparent 60%);
+      opacity: 0.8;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+    header .inner {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+    .title-block h1 {
+      font-size: 22px;
+      letter-spacing: 4px;
+      margin-bottom: 6px;
+    }
+    .title-block p {
+      font-size: 13px;
+      color: #444;
+    }
+    .back-link a {
+      font-size: 12px;
+      color: #555;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.25);
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.7);
+    }
+    .back-link a:hover {
+      background: #f0ebe3;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px 16px 32px;
+    }
+    section {
+      background: rgba(255,255,255,0.96);
+      border-radius: 10px;
+      padding: 16px 14px 14px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+    }
+    section h2 {
+      font-size: 16px;
+      letter-spacing: 3px;
+      margin-bottom: 6px;
+    }
+    section p {
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 6px;
+    }
+    section ul {
+      margin: 4px 0 6px 18px;
+      font-size: 13px;
+      color: #444;
+    }
+    section ul li {
+      margin-bottom: 4px;
+    }
+    footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4px 16px 16px;
+      font-size: 11px;
+      color: #777;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="inner">
+      <div class="title-block">
+        <h1>AI 分身</h1>
+        <p>让「我是谁」「我现在在干什么」跨对话框、跨模型地被记住。</p>
+      </div>
+      <div class="back-link">
+        <a href="index.html">返回棋盘</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>1 · 现有 AI 使用的痛点</h2>
+      <p>
+        课程里总结得很直接：大部分人现在用 AI 的方式是「一个对话聊到爆，然后换新对话一切清零」。
+      </p>
+      <ul>
+        <li>长对话聊到十几万字以后，模型注意力开始发散，回答变钝。</li>
+        <li>复杂问题只解决了 60%，对话框 token 爆了，被迫开新会话。</li>
+        <li>平台自带的「记忆」很浅，跨对话继续推进一个大项目非常吃力。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2 · 分身的核心思路</h2>
+      <p>
+        AI 分身做的不是「造一个人格」，而是给 AI 一个稳定的、可迁移的外部记忆。
+      </p>
+      <ul>
+        <li>用本地文件描述你的身份、目标、技能和经验。</li>
+        <li>和 AI 聊天时，把真正达成共识的部分压缩进这些文件。</li>
+        <li>下次对话时，把这些文件作为上下文引入，相当于「旧对话的精华版」。</li>
+      </ul>
+      <p>
+        这样，哪怕你换了模型、换了平台，只要这批文件还在，你的分身就可以迁移过去。
+      </p>
+    </section>
+
+    <section>
+      <h2>3 · 文件结构（identity / skills / goals / learned）</h2>
+      <ul>
+        <li><strong>identity.md</strong>：你是谁，在什么学校 / 专业，目前阶段在干什么。</li>
+        <li><strong>skills.md</strong>：你已经掌握的技能、常用工具栈、正在学习的方向。</li>
+        <li><strong>goals.md</strong>：你未来几个月到一年的重点目标，比如保研、竞赛、项目。</li>
+        <li><strong>learned.md</strong>：做对 / 做错的案例、教训、可复用的方法论。</li>
+      </ul>
+      <p>
+        聊天时其实一直在做两件事：对齐（把问题聊清楚）和压缩（把共识写成短文本）。
+        AI 分身要做的，就是确保这些压缩后的内容真正落到文件里。
+      </p>
+    </section>
+
+    <section>
+      <h2>4 · 「真的记住」的验证方式</h2>
+      <p>
+        直播里有个很实用的习惯：不要只听 AI 说「我记住了」，要去查文件有没有更新。
+      </p>
+      <ul>
+        <li>聊完一段重要内容后，明确说：「记住我这个新目标 / 想法」。</li>
+        <li>随后在本地打开对应文件，看内容是否被写入。</li>
+        <li>如果文件没变，说明刚才只是在「口头答应」，并没有真正记忆。</li>
+      </ul>
+      <p>
+        为了降低这种情况，提示词里可以把关键约束说三遍，这在课程里被当成一个小技巧专门讲。
+      </p>
+    </section>
+
+    <section>
+      <h2>5 · 应用场景</h2>
+      <ul>
+        <li>
+          写论文 / 简历：先在一个长对话里把定位、经历聊清楚，压缩成文档，
+          之后任何一个新对话只要加载这份文档，就能延续之前的共识。
+        </li>
+        <li>
+          学专业课：比如极限、概率、控制理论，把「终于搞懂的版本」记录下来，
+          以后再次提问时先把这份理解喂给 AI，节省大量对齐成本。
+        </li>
+        <li>
+          竞赛 / 项目：多轮讨论后的结论、方案、踩坑经验，都可以沉淀成 learn ed，
+          为后续队友或新项目提供「现成记忆」。
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    基于课程现场逐字稿整理 · 仅做个人学习与实践使用
+  </footer>
+</body>
+</html>

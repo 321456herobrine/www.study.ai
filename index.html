@@ -131,46 +131,81 @@
       padding: 8%;
     }
 
-    .cell {
-      position: relative;
-      padding: 6px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #f4f4f4;
-      z-index: 1;
-    }
-    .cell::before {
-      content: "";
-      position: absolute;
-      inset: 6px;
-      border-radius: 10px;
-      background: radial-gradient(circle at 30% 0%, rgba(255,255,255,0.14) 0, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-      transform: scale(0.98);
-    }
+.cell {
+  position: relative;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+}
 
-    .cell-main {
-      cursor: default;
-    }
-    .cell-link {
-      cursor: pointer;
-    }
+/* 可点击格子：整块白子可点 */
+.cell-link a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  cursor: pointer;
+}
 
-    .cell-title {
-      font-size: 14px;
-      letter-spacing: 3px;
-      margin-bottom: 4px;
-    }
-    .cell-sub {
-      font-size: 11px;
-      color: #dddddd;
-      opacity: 0.85;
-    }
+/* 白子本体 */
+.cell-link .stone {
+  width: 80%;
+  max-width: 120px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 25%, #ffffff 0, #f8f8f8 40%, #e4e4e4 75%, #d0d0d0 100%);
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.35),
+    0 0 10px rgba(255,255,255,0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 8px;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
 
+/* 白子上的文字：黑色 */
+.cell-link .stone .cell-title {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #111;
+  margin-bottom: 2px;
+}
+.cell-link .stone .cell-sub {
+  font-size: 10px;
+  color: #333;
+  opacity: 0.8;
+}
+
+/* 悬停效果：整个白子作为触发区域 */
+.cell-link a:hover .stone {
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.45),
+    0 0 14px rgba(255,255,255,0.8);
+}
+
+/* 不可点击格子（预留位）仍然是文字 */
+.cell-muted .cell-title {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #b0b5d0;
+  opacity: 0.8;
+}
+.cell-muted .cell-sub {
+  font-size: 10px;
+  color: #8b8fb0;
+  opacity: 0.7;
+}
     .cell-link a {
       text-decoration: none;
       color: inherit;
@@ -237,14 +272,18 @@
           </div>
           <div class="cell cell-link">
             <a href="ai-avatar.html">
-              <div class="cell-title">AI 分身</div>
-              <div class="cell-sub">记住「我是谁」的助手</div>
+              <div class="stone">
+                <div class="cell-title">AI 分身</div>
+                <div class="cell-sub">记住「我是谁」的助手</div>
+              </div>
             </a>
-          </div>
+          </div>    
           <div class="cell cell-link">
             <a href="daofashuqi.html">
-              <div class="cell-title">道法术器拆解</div>
-              <div class="cell-sub">把一锅粥拆成结构化知识</div>
+              <div class="stone">
+                <div class="cell-title">道法术器拆解</div>
+                <div class="cell-sub">把一锅粥拆成结构化知识</div>
+              </div>
             </a>
           </div>
           <div class="cell cell-muted">
